@@ -1,0 +1,27 @@
+.four-types {
+  display: flex;
+  flex-basis: auto;
+}
+
+.four-types > div {
+  width: 20vw;
+  margin: 10px;
+  justify-content: center;
+}
+
+.four-types > div > div {
+  display: flex;
+  margin: 5px;
+}
+
+h3 {
+  display: flex;
+  padding: 10px;
+  margin: auto;
+}
+
+.input {
+  display: flex;
+  margin: auto;
+  margin-bottom: 15px;
+}

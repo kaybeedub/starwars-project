@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="app.js" defer></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>The Starwars Dashboard</h1>
+      <div class="four-types">
+        <div class="people">
+          <div>
+            <h3>PEOPLE</h3>
+          </div>
+          <div>
+            <input class="input" id="people-input" onkeyup="filterPeople()" />
+          </div>
+          <div class="people-view"></div>
+        </div>
+        <div class="films">
+          <div>
+            <h3>FILMS</h3>
+          </div>
+          <div>
+            <input class="input" id="films-input" />
+          </div>
+          <div class="films-view"></div>
+        </div>
+        <div class="starships">
+          <div>
+            <h3>STARSHIPS</h3>
+          </div>
+          <div>
+            <input class="input" id="starships-input" />
+          </div>
+          <div class="starships-view"></div>
+        </div>
+        <div class="vehicles">
+          <div>
+            <h3>VEHICLES</h3>
+          </div>
+          <div>
+            <input class="input" id="vehicles-input" />
+          </div>
+          <div class="vehicles-view"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
