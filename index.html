@@ -23,6 +23,7 @@
           <div>
             <input class="input" id="people-input" onkeyup="filterPeople()" />
           </div>
+          <div class="people-display"></div>
           <div class="people-view"></div>
         </div>
         <div class="films">
@@ -30,8 +31,9 @@
             <h3>FILMS</h3>
           </div>
           <div>
-            <input class="input" id="films-input" />
+            <input class="input" id="films-input" onkeyup="filterFilms()" />
           </div>
+          <div class="films-display"></div>
           <div class="films-view"></div>
         </div>
         <div class="starships">
@@ -39,8 +41,13 @@
             <h3>STARSHIPS</h3>
           </div>
           <div>
-            <input class="input" id="starships-input" />
+            <input
+              class="input"
+              id="starships-input"
+              onkeyup="filterStarships()"
+            />
           </div>
+          <div class="starships-display"></div>
           <div class="starships-view"></div>
         </div>
         <div class="vehicles">
@@ -48,8 +55,13 @@
             <h3>VEHICLES</h3>
           </div>
           <div>
-            <input class="input" id="vehicles-input" />
+            <input
+              class="input"
+              id="vehicles-input"
+              onkeyup="filterVehicles()"
+            />
           </div>
+          <div class="vehicles-display"></div>
           <div class="vehicles-view"></div>
         </div>
       </div>

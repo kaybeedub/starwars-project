@@ -1,17 +1,20 @@
 const peopleDiv = document.querySelector('.people-view');
-const filmsDiv = document.querySelector('.films');
-const starshipsDiv = document.querySelector('.starships');
-const vehiclesDiv = document.querySelector('.vehicles');
-
-const peopleView = document.querySelector('.people-view');
+const filmsDiv = document.querySelector('.films-view');
+const starshipsDiv = document.querySelector('.starships-view');
+const vehiclesDiv = document.querySelector('.vehicles-view');
 
 const peopleInput = document.getElementById('people-input');
+const filmsInput = document.getElementById('films-input');
+const starshipsInput = document.getElementById('starships-input');
+const vehiclesInput = document.getElementById('vehicles-input');
 
-let people;
+let peopleState;
+let filmsState;
+let starshipsState;
+let vehiclesState;
 
 function renderPeople(people) {
   for (let i = 0; i < people.length; i++) {
-    console.log(peopleDiv);
     peopleDiv.innerHTML += `
     <div class="card">
     <div class="card-body">
@@ -23,114 +26,167 @@ function renderPeople(people) {
     </div>
     `;
   }
+  renderPeopleDisplay();
 }
 
 async function getPeople() {
   fetch(`http://star-cors.herokuapp.com/people`)
     .then(response => response.json())
     .then(function(data) {
+      peopleState = data;
       renderPeople(data.results);
-      people = data;
     });
 }
 
 getPeople();
 
+function filterPeople() {
+  let filteredPeople = peopleState.results.filter(person =>
+    person.name.includes(peopleInput.value.toUpperCase())
+  );
+  peopleDiv.innerHTML = ``;
+  renderPeople(filteredPeople);
+}
+
+const peopleDisplay = document.querySelector('.people-display');
+function renderPeopleDisplay() {
+  peopleDisplay.innerHTML = `Viewing ${peopleState.results.length} of ${peopleState.count} people`;
+}
 /*
-function filterPeople
-passes filtered data into renderPeople
-how to filter the data
-  look at the first letter (slice? position 0) of
-people.results[i] (?) and see if it is equal to the user input
+Phase Five - Add the Ability to Load More Data (if available)
 
-but what about if they type two letters?...
-
+using the next property of the api response show a load more button
+clicking the button should add the next set of items
+add the recently loaded items first
+if there are no more items to add, don't show the load more button
 */
+
+function renderFilms(films) {
+  for (let i = 0; i < films.length; i++) {
+    filmsDiv.innerHTML += `
+    <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">
+        ${films[i].title}
+      </h5>
+      <p>Released On: ${films[i].release_date}.
+    </div>
+    </div>
+    `;
+  }
+  renderFilmsDisplay();
+}
+
+async function getFilms() {
+  fetch(`http://star-cors.herokuapp.com/films`)
+    .then(response => response.json())
+    .then(function(data) {
+      filmsState = data;
+      renderFilms(data.results);
+    });
+}
+getFilms();
+
+function filterFilms() {
+  let filteredFilms = filmsState.results.filter(film =>
+    film.title.includes(filmsInput.value.toUpperCase())
+  );
+  filmsDiv.innerHTML = ``;
+  renderFilms(filteredFilms);
+}
+
+const filmsDisplay = document.querySelector('.films-display');
+function renderFilmsDisplay() {
+  filmsDisplay.innerHTML = `Viewing ${filmsState.results.length} of ${filmsState.count} films`;
+}
+
+function renderStarships(starships) {
+  for (let i = 0; i < starships.length; i++) {
+    starshipsDiv.innerHTML += `
+    <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">
+        ${starships[i].name}
+      </h5>
+      <p>${starships[i].starship_class}</p>
+    </div>
+    </div>
+    `;
+  }
+  renderStarshipsDisplay();
+}
+
+async function getStarships() {
+  fetch(`http://star-cors.herokuapp.com/starships`)
+    .then(response => response.json())
+    .then(function(data) {
+      starshipsState = data;
+      renderStarships(data.results);
+    });
+}
+
+getStarships();
+
+function filterStarships() {
+  let filteredStarships = starshipsState.results.filter(starship =>
+    starship.name.includes(starshipsInput.value.toUpperCase())
+  );
+  starshipsDiv.innerHTML = ``;
+  renderStarships(filteredStarships);
+}
+
+const starshipsDisplay = document.querySelector('.starships-display');
+function renderStarshipsDisplay() {
+  console.log(starshipsState);
+  starshipsDisplay.innerHTML = `Viewing ${starshipsState.results.length} of ${starshipsState.count} starships`;
+}
+function renderVehicles(vehicles) {
+  for (let i = 0; i < vehicles.length; i++) {
+    vehiclesDiv.innerHTML += `
+        <div class="card">
+        <div class="card-body">
+
+          <h5 class="card-title">
+            ${vehicles[i].name}
+          </h5>
+          <p>Manufactured by ${vehicles[i].manufacturer}</p>
+          </div>
+        </div>
+        `;
+  }
+  renderVehiclesDisplay();
+}
+
+async function getVehicles() {
+  fetch(`http://star-cors.herokuapp.com/vehicles`)
+    .then(response => response.json())
+    .then(function(data) {
+      vehiclesState = data;
+      renderVehicles(data.results);
+    });
+}
+getVehicles();
+
+function filterVehicles() {
+  let filteredVehicles = vehiclesState.results.filter(vehicle =>
+    vehicle.name.includes(vehiclesInput.value.toUpperCase())
+  );
+  vehiclesDiv.innerHTML = ``;
+  renderVehicles(filteredVehicles);
+}
+
+const vehiclesDisplay = document.querySelector('.vehicles-display');
+function renderVehiclesDisplay() {
+  console.log(vehiclesState);
+  vehiclesDisplay.innerHTML = `Viewing ${vehiclesState.results.length} of ${vehiclesState.count} vehicles`;
+}
+
 /* no one including david can figure out how to get this to work:
 
 const peopleInput = document.getElementById('people-input');
 console.log(peopleInput);
 peopleInput.addEventListener('click', console.log('clicked'));
 */
-
-function filterPeople() {
-  // console.log(people.results);
-
-  let filteredPeople = people.results.filter(person =>
-    person.name.includes(peopleInput.value.toUpperCase())
-  );
-  // console.log(filteredPeople);
-  renderPeople(filteredPeople);
-}
-
-function renderFilms(films) {
-  for (let i = 0; i < films.results.length; i++) {
-    filmsDiv.innerHTML += `
-    <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">
-        ${films.results[i].title}
-      </h5>
-      <p>Released On: ${films.results[i].release_date}.
-    </div>
-    </div>
-    `;
-  }
-}
-
-async function getFilms() {
-  fetch(`http://star-cors.herokuapp.com/films`)
-    .then(response => response.json())
-    .then(renderFilms);
-}
-getFilms();
-
-function renderStarships(starships) {
-  for (let i = 0; i < starships.results.length; i++) {
-    starshipsDiv.innerHTML += `
-    <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">
-        ${starships.results[i].name}
-      </h5>
-      <p>${starships.results[i].starship_class}</p>
-    </div>
-    </div>
-    `;
-  }
-}
-
-async function getStarships() {
-  fetch(`http://star-cors.herokuapp.com/starships`)
-    .then(response => response.json())
-    .then(renderStarships);
-}
-
-getStarships();
-
-function renderVehicles(vehicles) {
-  for (let i = 0; i < vehicles.results.length; i++) {
-    vehiclesDiv.innerHTML += `
-        <div class="card">
-        <div class="card-body">
-
-          <h5 class="card-title">
-            ${vehicles.results[i].name}
-          </h5>
-          <p>Manufactured by ${vehicles.results[i].manufacturer}</p>
-          </div>
-        </div>
-        `;
-  }
-}
-
-async function getVehicles() {
-  fetch(`http://star-cors.herokuapp.com/vehicles`)
-    .then(response => response.json())
-    .then(renderVehicles);
-}
-getVehicles();
-
 /*
 
 futile attempts to "make it better":
@@ -194,3 +250,8 @@ async function getHomeworld(people) {
 }
 getHomeworld();
 */
+
+// reall cool thing
+// do this at beginning: const state={}
+// then throughout functions can add state.key=value to add the variable to the state object and can access globally
+// can use if thens in function where if !state.key=value, alert that the data isnt availabe yet (so you know why something isnt working)

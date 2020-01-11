@@ -9,9 +9,13 @@
   justify-content: center;
 }
 
-.four-types > div > div {
+.four-types > div > div > div {
   display: flex;
   margin: 5px;
+}
+
+.four-types > div > div {
+  margin: 10px;
 }
 
 h3 {
